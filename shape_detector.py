@@ -28,7 +28,7 @@ def find_shape_contour(address):
 
     return template_img_contour, templat_img
 
-def contour_compare(target_frame, template_contour, match_threshold = 0.10, min_area_ratio=0.001, max_area_ratio=0.80):
+def contour_compare(target_frame, template_contour, match_threshold = 0.09, min_area_ratio=0.0005, max_area_ratio=0.80):
     target_gray = cv2.cvtColor(target_frame, cv2.COLOR_BGR2GRAY)
     #target_gray = cv2.equalizeHist(target_gray)
     blured = cv2.GaussianBlur(target_gray, (5, 5), sigmaX=0)
@@ -56,7 +56,7 @@ def contour_compare(target_frame, template_contour, match_threshold = 0.10, min_
     if closest_contour:
         cv2.drawContours(target_frame, closest_contour, -1, (0, 255, 0), 3)
         
-    return closest_contour, target_frame, thresh2
+    return closest_contour, target_frame
 
 
 def run_camera(template_contour, camid = 0):
@@ -73,7 +73,7 @@ def run_camera(template_contour, camid = 0):
             break
 
         # כאן אתה תקרא ל־contour_compare בעצמך
-        contour, frame, thresh2 = contour_compare(frame, template_contour)
+        contour, frame = contour_compare(frame, template_contour)
 
         cv2.imshow("Live Feed", frame)
 
