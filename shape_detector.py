@@ -28,7 +28,7 @@ def find_shape_contour(address):
 
     return template_img_contour, templat_img
 
-def contour_compare(target_frame, template_contour, match_threshold = 0.2, min_area_ratio=0.001, max_area_ratio=0.80):
+def contour_compare(target_frame, template_contour, match_threshold = 0.10, min_area_ratio=0.001, max_area_ratio=0.80):
     target_gray = cv2.cvtColor(target_frame, cv2.COLOR_BGR2GRAY)
     #target_gray = cv2.equalizeHist(target_gray)
     blured = cv2.GaussianBlur(target_gray, (5, 5), sigmaX=0)
